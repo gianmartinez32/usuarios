@@ -31,6 +31,7 @@ export const COLUMNS_PRODUCTS: (onEdit: (id: string) => any, onDelete: (id: stri
     },
     {
         title: 'Acciones',
+        fixed: 'right',
         dataIndex: 'acciones',
         key: 'acciones',
         render: (_value, record) => <><NavLink to={'/form'}>

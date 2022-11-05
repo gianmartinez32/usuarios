@@ -26,6 +26,7 @@ const PersonasList = () => {
         <Row style={{ width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: 'white' }} >
           {personas.length > 0 ?
             <Table
+            scroll={{x:true}}
               style={{ width: '100%' }}
               columns={COLUMNS_PRODUCTS(handleEdit, handleDelete)}
               dataSource={personas}
