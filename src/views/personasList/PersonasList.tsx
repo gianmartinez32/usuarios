@@ -1,33 +1,61 @@
-import { Layout, message, Row, Table } from 'antd'
-import { Content, Footer, Header } from 'antd/lib/layout/layout'
+import { Button, Layout, message, Result, Row, Table } from 'antd'
+import { Content, Footer } from 'antd/lib/layout/layout'
 import React, { useContext } from 'react'
+import { NavLink } from 'react-router-dom'
 import { personaContext } from '../../hooks/PersonasProvider'
-import { IContextPersona,  } from '../../interfaces/Provider.interfaces'
+import { IContextPersona, } from '../../interfaces/Provider.interfaces'
 import { COLUMNS_PRODUCTS } from '../../utils/columns'
-;
+  ;
 
 
 const PersonasList = () => {
   const { personas, setPersonas, setIdEdit } = useContext(personaContext) as IContextPersona
+
 
   const handleEdit = (id: string) => {
     setIdEdit(id)
   }
 
   const handleDelete = (id: string) => {
-    setPersonas(personas.filter((persona)=>persona.id!==id))
+    setPersonas(personas.filter((persona) => persona.id !== id))
     message.info('Persona eliminada correctamente')
   }
   return (
-    <Layout /* style={{display:'flex', justifyContent:'center'}} */>
-      <Header style={{ backgroundColor: 'white' }}>Lista de Personas</Header>
+    <Layout>
       <Content style={{ display: 'flex', justifyContent: 'center' }}>
-
-        <Row >
-          <Table columns={COLUMNS_PRODUCTS(handleEdit, handleDelete)} dataSource={personas} size='middle'></Table>
+        <Row style={{ width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: 'white' }} >
+          {personas.length > 0 ?
+            <Table
+              style={{ width: '100%' }}
+              columns={COLUMNS_PRODUCTS(handleEdit, handleDelete)}
+              dataSource={personas}
+              size='middle' />
+            :
+            <Result
+              title="No hay usuarios registrados"
+              extra={
+                <NavLink to={'/form'}>
+                  <Button style={{
+                    border: '2px solid',
+                    backgroundColor: '#58BD5C',
+                    borderColor: '#58BD5C',
+                  }} type="primary" key="console">
+                    Crear Usuario
+                  </Button>
+                </NavLink>
+              }
+            />
+          }
         </Row>
       </Content>
-      <Footer>Developved by Gian Martinez</Footer>
+      <Footer style={{
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        justifyContent: 'end'
+      }}>
+        Developed by Gian Martinez
+      </Footer>
     </Layout>
   )
 }

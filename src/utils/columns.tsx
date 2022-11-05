@@ -33,11 +33,11 @@ export const COLUMNS_PRODUCTS: (onEdit: (id: string) => any, onDelete: (id: stri
         title: 'Acciones',
         dataIndex: 'acciones',
         key: 'acciones',
-        render: (_value, record) => <><NavLink to={'/'}>
-            <Button onClick={() => onEdit(record.id)}>Editar</Button>
+        render: (_value, record) => <><NavLink to={'/form'}>
+            <Button key={record.id} onClick={() => onEdit(record.id)}>Editar</Button>
         </NavLink>
 
-            <Button onClick={() => onDelete(record.id)}>Eliminar</Button>
+            <Button key={record.id} onClick={() => onDelete(record.id)}>Eliminar</Button>
         </>
     }
 ]

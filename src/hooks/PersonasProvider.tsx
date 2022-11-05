@@ -8,10 +8,6 @@ const data: IPersona[] = [
 
 ]
 
-
-
-
-
 const PersonasProvider = ({children}:IPropsPersonaProvider) => {
     const [idEdit, setIdEdit] = useState('')
     const [personas, setPersonas] = useState(data)
