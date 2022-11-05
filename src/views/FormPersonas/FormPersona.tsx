@@ -54,7 +54,7 @@ const FormPersona = () => {
       form.setFieldValue(['persona', 'contraseña'], personaEditar[0].contraseña)
 
     }
-  }, [])
+  }, [idEdit,form,personas])
 
 
   const validarId = (id: number | string) => {
