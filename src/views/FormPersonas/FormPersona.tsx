@@ -1,17 +1,18 @@
 import React, { useContext, useEffect } from 'react'
-import { Layout, Typography } from 'antd';
+import { Layout, Select, Typography } from 'antd';
 import { Button, Form, Input, message } from 'antd';
 import { IContextPersona } from '../../interfaces/Provider.interfaces';
 import { personaContext } from '../../hooks/PersonasProvider';
 import { IPersona } from '../../interfaces/Personas';
 import { useNavigate } from 'react-router-dom';
 import { IStyles } from '../../interfaces/Props';
+import { EMPLEADOS_OPTION } from '../../utils/columns';
 const { Content } = Layout;
 
 interface Ivalues {
   persona: IPersona
 }
-const styles:IStyles = {
+const styles: IStyles = {
   input: {
     border: '2px solid',
     borderColor: '#58BD5C',
@@ -21,7 +22,7 @@ const styles:IStyles = {
     backgroundColor: '#58BD5C',
     borderColor: '#58BD5C',
   },
-  content:{
+  content: {
     backgroundColor: 'white',
     display: 'flex',
     width: '100%',
@@ -29,7 +30,7 @@ const styles:IStyles = {
     justifyContent: 'center',
     padding: '10px'
   },
-  form:{
+  form: {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -52,9 +53,11 @@ const FormPersona = () => {
       form.setFieldValue(['persona', 'apellido'], personaEditar[0].apellido)
       form.setFieldValue(['persona', 'edad'], personaEditar[0].edad)
       form.setFieldValue(['persona', 'contraseña'], personaEditar[0].contraseña)
+      form.setFieldValue(['persona', 'rol'], personaEditar[0].rol)
+
 
     }
-  }, [idEdit,form,personas])
+  }, [idEdit, form, personas])
 
 
   const validarId = (id: number | string) => {
@@ -121,6 +124,9 @@ const FormPersona = () => {
           </Form.Item>
           <Form.Item name={['persona', 'edad']} label="Edad" rules={[{ required: true }]}>
             <Input style={styles.input} type='number' />
+          </Form.Item>
+          <Form.Item name={['persona', 'rol']} label="Rol" rules={[{ required: true }]}>
+            <Select style={styles.input} options={EMPLEADOS_OPTION} />
           </Form.Item>
           <Form.Item style={{ alignSelf: 'center' }}>
             <Button style={styles.btn} type="primary" htmlType="submit">

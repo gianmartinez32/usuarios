@@ -4,4 +4,6 @@ export interface IPersona{
     apellido:string,
     contraseña:string,
     edad:string,
+
+    rol:string
 }

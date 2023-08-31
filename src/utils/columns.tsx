@@ -42,3 +42,10 @@ export const COLUMNS_PRODUCTS: (onEdit: (id: string) => any, onDelete: (id: stri
         </>
     }
 ]
+
+export const EMPLEADOS_OPTION = [{
+    label: 'Cliente', value: 'cliente'
+  },
+  { label: 'Empleado', value: 'empleado' }, {
+    label: 'Proveedor', value: 'proveedor'
+  }]

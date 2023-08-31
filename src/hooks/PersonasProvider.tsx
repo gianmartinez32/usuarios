@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { IPersona } from '../interfaces/Personas'
 import { IPropsPersonaProvider } from '../interfaces/Props'
 
@@ -8,18 +8,37 @@ const data: IPersona[] = [
 
 ]
 
-const PersonasProvider = ({children}:IPropsPersonaProvider) => {
-    const [idEdit, setIdEdit] = useState('')
-    const [personas, setPersonas] = useState(data)
+const PersonasProvider = ({ children }: IPropsPersonaProvider) => {
+  const [idEdit, setIdEdit] = useState('')
+  const [personas, setPersonas] = useState(data)
 
-    return (
-      <div> 
-      <personaContext.Provider value={{personas, setPersonas, idEdit, setIdEdit}}>
+  useEffect(() => {
+    if (personas.length > 0) {
+      localStorage.setItem('personas', JSON.stringify(personas))
+
+    }
+  }, [personas])
+
+  useEffect(() => {
+    const getPersonas = async () => {
+      const persons = await localStorage.getItem('personas')
+      if (persons) {
+        setPersonas(JSON.parse(persons))
+      }
+    }
+    getPersonas()
+  }, [])
+
+
+
+  return (
+    <div>
+      <personaContext.Provider value={{ personas, setPersonas, idEdit, setIdEdit }}>
         {children}
       </personaContext.Provider>
-    
-      </div>
-    )
+
+    </div>
+  )
 }
 
 export default PersonasProvider
